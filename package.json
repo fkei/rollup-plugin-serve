@@ -15,6 +15,7 @@
     "rollup",
     "rollup-plugin",
     "serve",
+    "server",
     "dev-server",
     "static"
   ],
