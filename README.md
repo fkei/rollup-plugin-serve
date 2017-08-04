@@ -72,6 +72,11 @@ server({
   ssl_cert: fs.readFileSync('server.crt'), // optional
   //ssl_ciphers: ... // optional Intermediate compatibility (default) @see https://wiki.mozilla.org/Security/Server_Side_TLS
 
+  // Any data can be set in the response header
+  customResponseHeaders: {
+    'X-PING': 'PONG',
+    // ...
+  }
 })
 ```
 

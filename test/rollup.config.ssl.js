@@ -8,6 +8,9 @@ export default {
       historyApiFallback: true,
       contentBase: ['.', 'base1', 'base2'],
       ssl: true,
+      customResponseHeaders: {
+        'X-PING': 'PONG',
+      }
     })
   ]
 }

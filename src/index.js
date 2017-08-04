@@ -1,7 +1,7 @@
 import { readFile } from 'fs'
 import http from 'http'
 import https from 'https'
-import { resolve, join } from 'path'
+import { resolve } from 'path'
 
 import mime from 'mime'
 import opener from 'opener'
@@ -72,13 +72,22 @@ export default function server (options = { contentBase: '' }) {
     options.ssl_ciphers = options.ssl_ciphers || DEFAULT_SSL_CIPHERS
   }
 
+  // Custom response header
+  options.customResponseHeaders = options.customResponseHeaders || {}
+
   mime.default_type = 'text/plain'
 
   function handler(request, response) {
+    // Set custom response headers.
+    Object.keys(options.customResponseHeaders).forEach(function(key) {
+      response.setHeader(key, options.customResponseHeaders[key]);
+    });
+
     // Remove querystring
     const urlPath = decodeURI(request.url.split('?')[0])
 
     readFileFromContentBase(options.contentBase, urlPath, function (error, content, filePath) {
+
       if (!error)  {
         return found(response, filePath, content)
       }
