@@ -10,4 +10,4 @@ if (req.getResponseHeader('x-ping').toLocaleLowerCase() === 'pong') {
 
 
 window.onload = () => document.body.innerHTML += '<br>' + window.location.pathname
- + '<br>' + lib + '<br>' + message.join('<br>')
+  + '<br>' + lib + '<br>' + message.join('<br>')

@@ -1,7 +1,7 @@
-import { readFile } from 'fs'
+import {readFile} from 'fs'
 import http from 'http'
 import https from 'https'
-import { resolve } from 'path'
+import {resolve} from 'path'
 
 import mime from 'mime'
 import opener from 'opener'
@@ -56,9 +56,9 @@ Gy3dZ2DCszBrC8Hmzr1t/5FBhy7wi1ihQ0dE4Q==
 // Intermediate compatibility (default) @see https://wiki.mozilla.org/Security/Server_Side_TLS
 const DEFAULT_SSL_CIPHERS = 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS'
 
-export default function server (options = { contentBase: '' }) {
+export default function server(options = {contentBase: ''}) {
   if (Array.isArray(options) || typeof options === 'string') {
-    options = { contentBase: options }
+    options = {contentBase: options}
   }
   options.contentBase = Array.isArray(options.contentBase) ? options.contentBase : [options.contentBase]
   options.host = options.host || 'localhost'
@@ -79,7 +79,7 @@ export default function server (options = { contentBase: '' }) {
 
   function handler(request, response) {
     // Set custom response headers.
-    Object.keys(options.customResponseHeaders).forEach(function(key) {
+    Object.keys(options.customResponseHeaders).forEach(function (key) {
       response.setHeader(key, options.customResponseHeaders[key]);
     });
 
@@ -88,14 +88,16 @@ export default function server (options = { contentBase: '' }) {
 
     readFileFromContentBase(options.contentBase, urlPath, function (error, content, filePath) {
 
-      if (!error)  {
+      if (!error) {
         return found(response, filePath, content)
       }
       if (error.code !== 'ENOENT') {
         response.writeHead(500)
         response.end('500 Internal Server Error' +
           '\n\n' + filePath +
-          '\n\n' + Object.keys(error).map(function (k) { return error[k]; }).join('\n') +
+          '\n\n' + Object.keys(error).map(function (k) {
+            return error[k];
+          }).join('\n') +
           '\n\n(rollup-plugin-server)', 'utf-8')
         return
       }
@@ -136,7 +138,7 @@ export default function server (options = { contentBase: '' }) {
 
   return {
     name: 'server',
-    ongenerate () {
+    ongenerate() {
       if (!running) {
         running = true
 
@@ -155,7 +157,7 @@ export default function server (options = { contentBase: '' }) {
   }
 }
 
-function readFileFromContentBase (contentBase, urlPath, callback) {
+function readFileFromContentBase(contentBase, urlPath, callback) {
   let filePath = resolve(contentBase[0] || '.', '.' + urlPath)
 
   // Load index.html in directories
@@ -174,18 +176,18 @@ function readFileFromContentBase (contentBase, urlPath, callback) {
   })
 }
 
-function notFound (response, filePath) {
+function notFound(response, filePath) {
   response.writeHead(404)
   response.end('404 Not Found' +
     '\n\n' + filePath +
     '\n\n(rollup-plugin-server)', 'utf-8')
 }
 
-function found (response, filePath, content) {
-  response.writeHead(200, { 'Content-Type': mime.lookup(filePath) })
+function found(response, filePath, content) {
+  response.writeHead(200, {'Content-Type': mime.lookup(filePath)})
   response.end(content, 'utf-8')
 }
 
-function green (text) {
+function green(text) {
   return '\u001b[1m\u001b[32m' + text + '\u001b[39m\u001b[22m'
 }
