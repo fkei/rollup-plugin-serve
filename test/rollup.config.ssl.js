@@ -6,7 +6,8 @@ export default {
   plugins: [
     serve({
       historyApiFallback: true,
-      contentBase: ['.', 'base1', 'base2']
+      contentBase: ['.', 'base1', 'base2'],
+      ssl: true,
     })
   ]
 }
