@@ -1,5 +1,6 @@
 The MIT License (MIT)
 
+Copyright (c) 2017 Kei Funagayama
 Copyright (c) 2016 Thomas Ghysels
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

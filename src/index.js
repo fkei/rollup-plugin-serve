@@ -56,7 +56,7 @@ Gy3dZ2DCszBrC8Hmzr1t/5FBhy7wi1ihQ0dE4Q==
 // Intermediate compatibility (default) @see https://wiki.mozilla.org/Security/Server_Side_TLS
 const DEFAULT_SSL_CIPHERS = 'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS'
 
-export default function serve (options = { contentBase: '' }) {
+export default function server (options = { contentBase: '' }) {
   if (Array.isArray(options) || typeof options === 'string') {
     options = { contentBase: options }
   }
@@ -87,7 +87,7 @@ export default function serve (options = { contentBase: '' }) {
         response.end('500 Internal Server Error' +
           '\n\n' + filePath +
           '\n\n' + Object.keys(error).map(function (k) { return error[k]; }).join('\n') +
-          '\n\n(rollup-plugin-serve)', 'utf-8')
+          '\n\n(rollup-plugin-server)', 'utf-8')
         return
       }
       if (request.url === '/favicon.ico') {
@@ -126,7 +126,7 @@ export default function serve (options = { contentBase: '' }) {
   var running = options.verbose === false
 
   return {
-    name: 'serve',
+    name: 'server',
     ongenerate () {
       if (!running) {
         running = true
@@ -169,7 +169,7 @@ function notFound (response, filePath) {
   response.writeHead(404)
   response.end('404 Not Found' +
     '\n\n' + filePath +
-    '\n\n(rollup-plugin-serve)', 'utf-8')
+    '\n\n(rollup-plugin-server)', 'utf-8')
 }
 
 function found (response, filePath, content) {

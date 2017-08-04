@@ -1,37 +1,41 @@
-# Rollup plugin to serve the bundle
+# Rollup plugin to server the bundle
+
+## forked from thgh/rollup-plugin-serve
+
 
 <a href="LICENSE">
   <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="Software License" />
 </a>
-<a href="https://github.com/thgh/rollup-plugin-serve/issues">
-  <img src="https://img.shields.io/github/issues/thgh/rollup-plugin-serve.svg" alt="Issues" />
+<a href="https://github.com/fkei/rollup-plugin-server/issues">
+  <img src="https://img.shields.io/github/issues/fkei/rollup-plugin-server.svg" alt="Issues" />
 </a>
 <a href="http://standardjs.com/">
   <img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg" alt="JavaScript Style Guide" />
 </a>
-<a href="https://npmjs.org/package/rollup-plugin-serve">
-  <img src="https://img.shields.io/npm/v/rollup-plugin-serve.svg?style=flat-squar" alt="NPM" />
+<a href="https://npmjs.org/package/rollup-plugin-server">
+  <img src="https://img.shields.io/npm/v/rollup-plugin-server.svg?style=flat-squar" alt="NPM" />
 </a>
-<a href="https://github.com/thgh/rollup-plugin-serve/releases">
-  <img src="https://img.shields.io/github/release/thgh/rollup-plugin-serve.svg" alt="Latest Version" />
+<a href="https://github.com/fkei/rollup-plugin-server/releases">
+  <img src="https://img.shields.io/github/release/fkei/rollup-plugin-server.svg" alt="Latest Version" />
 </a>
   
 ## Installation
 ```
-npm install --save-dev rollup-plugin-serve
+npm install --save-dev rollup-plugin-server
 ```
 
 ## Usage
 ```js
 // rollup.config.js
-import serve from 'rollup-plugin-serve'
+import server from 'rollup-plugin-server'
 
 export default {
   entry: 'entry.js',
   dest: 'bundle.js',
   plugins: [
-    serve('dist')
+    server('dist')
   ]
+  // ssl: true, // optional
 }
 ```
 
@@ -39,10 +43,10 @@ export default {
 
 By default it serves the current project folder. Change it by passing a string:
 ```js
-serve('public')    // will be used as contentBase
+server('public')    // will be used as contentBase
 
 // Default options
-serve({
+server({
   // Launch in browser (default: false)
   open: true,
 
@@ -60,11 +64,17 @@ serve({
 
   // Options used in setting up server
   host: 'localhost',
-  port: 10001
+  port: 10001,
+  
+  ssl: true, // optional
+  // @see https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener
+  ssl_key: fs.readFileSync('server.key'), // optional
+  ssl_cert: fs.readFileSync('server.crt'), // optional
+  //ssl_ciphers: ... // optional Intermediate compatibility (default) @see https://wiki.mozilla.org/Security/Server_Side_TLS
+
 })
 ```
 
->>>>>>> master
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
@@ -80,6 +90,7 @@ To get it running:
 
 ## Credits
 
+- [Kei Funagayama](https://github.com/fkei)
 - [Thomas Ghysels](https://github.com/thgh)
 - [All Contributors][link-contributors]
 
@@ -87,6 +98,6 @@ To get it running:
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
-[link-author]: https://github.com/thgh
+[link-authors]: https://github.com/thgh, https://github.com/fkei
 [link-contributors]: ../../contributors
-[rollup-plugin-serve]: https://www.npmjs.com/package/rollup-plugin-serve
+[rollup-plugin-server]: https://www.npmjs.com/package/rollup-plugin-server
