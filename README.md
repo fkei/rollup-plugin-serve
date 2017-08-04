@@ -119,5 +119,7 @@ To get it running:
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 [link-authors]: https://github.com/thgh, https://github.com/fkei
+
 [link-contributors]: ../../contributors
+
 [rollup-plugin-server]: https://www.npmjs.com/package/rollup-plugin-server
