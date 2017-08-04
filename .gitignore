@@ -14,3 +14,6 @@ node_modules
 dist/*
 !dist/favicon.ico
 test/dest.js
+
+*.iml
+*.idea
