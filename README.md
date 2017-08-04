@@ -76,9 +76,23 @@ server({
 })
 ```
 
-## Changelog
+## Test
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+HTTP
+
+```
+$ cd ./test
+$ ../node_modules/.bin/rollup -c rollup.config.js
+```
+> Browser access : http://localhost:10001, http://localhost:10001/base1, http://localhost:10001/base2
+
+HTTPS
+
+```
+$ cd ./test
+$ ../node_modules/.bin/rollup -c rollup.config.ssh.js
+```
+> Browser access : https://localhost:10001, https://localhost:10001/base1, https://localhost:10001/base2
 
 ## Contributing
 
