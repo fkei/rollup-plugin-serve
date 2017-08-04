@@ -1,8 +1,5 @@
 # Rollup plugin to server the bundle
 
-## forked from thgh/rollup-plugin-serve
-
-
 <a href="LICENSE">
   <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="Software License" />
 </a>
@@ -18,7 +15,11 @@
 <a href="https://github.com/fkei/rollup-plugin-server/releases">
   <img src="https://img.shields.io/github/release/fkei/rollup-plugin-server.svg" alt="Latest Version" />
 </a>
-  
+
+
+## forked from [thgh/rollup-plugin-serve](thgh/rollup-plugin-serve)
+
+
 ## Installation
 ```
 npm install --save-dev rollup-plugin-server
@@ -80,9 +81,23 @@ server({
 })
 ```
 
-## Changelog
+## Test
 
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
+HTTP
+
+```
+$ cd ./test
+$ ../node_modules/.bin/rollup -c rollup.config.js
+```
+> Browser access : http://localhost:10001, http://localhost:10001/base1, http://localhost:10001/base2
+
+HTTPS
+
+```
+$ cd ./test
+$ ../node_modules/.bin/rollup -c rollup.config.ssh.js
+```
+> Browser access : https://localhost:10001, https://localhost:10001/base1, https://localhost:10001/base2
 
 ## Contributing
 
