@@ -24,6 +24,8 @@
 ```
 npm install --save-dev rollup-plugin-server
 ```
+> [rollup-plugin-server]: https://www.npmjs.com/package/rollup-plugin-server
+
 
 ## Usage
 ```js
@@ -112,15 +114,7 @@ To get it running:
 
 - [Kei Funagayama](https://github.com/fkei)
 - Fork source : [Thomas Ghysels](https://github.com/thgh)
-- [All Contributors]
-- [link-contributors]
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
-
-[link-authors]
-- https://github.com/thgh
-- https://github.com/fkei
-
-[rollup-plugin-server]: https://www.npmjs.com/package/rollup-plugin-server
