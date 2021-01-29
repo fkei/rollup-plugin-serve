@@ -1,7 +1,7 @@
 import {readFile} from 'fs'
 import http from 'http'
 import https from 'https'
-import {resolve} from 'path'
+import {resolve, posix} from 'path'
 
 import mime from 'mime'
 import opener from 'opener'
@@ -84,7 +84,10 @@ export default function server(options = {contentBase: ''}) {
     });
 
     // Remove querystring
-    const urlPath = decodeURI(request.url.split('?')[0])
+    const unsafePath = decodeURI(request.url.split('?')[0])
+    
+    // Don't allow path traversal
+    const urlPath = posix.normalize(unsafePath)
 
     readFileFromContentBase(options.contentBase, urlPath, function (error, content, filePath) {
 
